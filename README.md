@@ -14,73 +14,59 @@ This project is a demonstration of deploying a simple static website using Docke
 ├── html
 │   └── index.html          # Static HTML files served by Nginx
 └── services.yaml           # Kubernetes Service configuration
-Components
-Dockerfile
+```
+## Components
+
+1. Dockerfile
+
+* A Dockerfile that builds an Nginx image using the official nginx:alpine base image.
+* The static files are copied to /usr/share/nginx/html within the container.
+* The custom Nginx configuration is copied to /etc/nginx/nginx.conf.
+
+2. Docker Hub
+
+* The Docker image is built and pushed to Docker Hub under the repository iksm69/overkill:latest.
+
+3. Kubernetes Deployment
+
+* The deployment.yaml file defines a Kubernetes Deployment with 3 replicas of the Nginx container.
+* The Deployment ensures that three Pods are running the Nginx container at all times.
+
+4. Kubernetes Service
+
+* The services.yaml file defines a Kubernetes Service of type NodePort.
+* This Service exposes the Nginx application on a specific port, allowing access from a web browser.
+
+## Deployment Instructions
+
+### Prerequisites
+[Docker](https://docs.docker.com/engine/ "Docker")
+[Minikube](https://kubernetes.io/fr/docs/tasks/tools/install-minikube/ "Minikube")
+[Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/ "Kubectl")
+
+### Steps
+
+1. Start Minikube
+
+```bash
+minikube start
 ```
 
-A Dockerfile that builds an Nginx image using the official nginx:alpine base image.
-The static files are copied to /usr/share/nginx/html within the container.
-The custom Nginx configuration is copied to /etc/nginx/nginx.conf.
-Docker Hub
-
-The Docker image is built and pushed to Docker Hub under the repository iksm69/overkill:latest.
-Kubernetes Deployment
-
-The deployment.yaml file defines a Kubernetes Deployment with 3 replicas of the Nginx container.
-The Deployment ensures that three Pods are running the Nginx container at all times.
-Kubernetes Service
-
-The services.yaml file defines a Kubernetes Service of type NodePort.
-This Service exposes the Nginx application on a specific port, allowing access from a web browser.
-Deployment Instructions
-Prerequisites
-Docker
-Minikube
-Kubectl
-Steps
-Build and Push Docker Image
-
-bash
-Copy code
-docker build -t iksm69/overkill:latest .
-docker push iksm69/overkill:latest
-Start Minikube
-
-bash
-Copy code
-minikube start
-Deploy the Application on Kubernetes
+2. Deploy the Application on Kubernetes
 
 Apply the Deployment and Service configuration files:
-
-bash
-Copy code
+```bash
 kubectl apply -f deployment.yaml
 kubectl apply -f services.yaml
-Access the Application
+```
+
+3. Access the Application
 
 Determine the NodePort assigned by Kubernetes and access the application in your browser:
-
-bash
-Copy code
+```bash
 minikube service nginx-service --url
-Conclusion
+```
+
+## Conclusion
+
 This project demonstrates a simple deployment of a static website using Docker and Kubernetes. The setup includes building a Docker image, pushing it to Docker Hub, and deploying it on a local Kubernetes cluster using Minikube, with a scalable deployment ensured by Kubernetes.
-
-vbnet
-Copy code
-
-This README provides a clear overview of your project, its components, and step-by-step instructions on how to build, deploy, and access the application.
-You said:
-donne moi une idee de comment nommer mon repos github avec kubernetes suivie de overkill je met un - ou un / ou un _ etc etc ???
-ChatGPT said:
-ChatGPT
-Pour nommer ton dépôt GitHub, l'utilisation du tiret (-) est généralement la meilleure pratique. Il est lisible, bien accepté dans les conventions de nommage, et aide à séparer les mots de manière claire.
-
-Idée de nom de dépôt :
-kubernetes-overkill
-Pourquoi le tiret (-) ?
-Lisibilité : Les mots sont clairement séparés, ce qui rend le nom facile à lire.
-Conventions de nommage : Le tiret est couramment utilisé dans les noms de projets open-source et les dépôts GitHub.
-Compatibilité : Le tiret est compatible avec la plupart des systèmes et ne pose pas de problème dans les URL.
-Tu pourrais également utiliser un underscore (_) si tu préfères, mais le tiret est généralement plus standard. Éviter le slash (/), car il pourrait être interprété comme un chemin plutôt qu'un nom de dépôt.

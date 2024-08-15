@@ -15,6 +15,9 @@ This project is a demonstration of deploying a simple static website using Docke
 │   └── index.html          # Static HTML files served by Nginx
 └── services.yaml           # Kubernetes Service configuration
 ```
+
+<img src="./CloudArchitecture.png" alt="Cloud Architecture" style="width:100%;"/>
+
 ## Components
 
 1. Dockerfile
